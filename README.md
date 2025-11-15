@@ -1,32 +1,69 @@
-Library Management System API
-A comprehensive RESTful API for managing library operations including books, members, and transactions.
-🚀 Features
+**Library Management System API** 
 
-Book Management: CRUD operations with search and availability tracking
-Member Management: Registration and profile management with membership types
-Transaction Management: Issue/return books with automatic fine calculation
-Input Validation: Comprehensive validation with proper error messages
-Exception Handling: Global exception handler with proper HTTP status codes
-Database Operations: JPA/Hibernate with optimized entity relationships
-Pagination Support: Efficient data retrieval for large datasets
+---
 
-📋 Prerequisites
+# 📚 **Library Management System API**
 
-Java 17 or higher
-Maven 3.6+
-MySQL 8.0+
-Postman (for API testing)
+A comprehensive **RESTful API** for managing library operations including books, members, and transactions.
 
-🛠️ Technologies Used
+---
 
-Spring Boot 3.2.0: Application framework
-Spring Data JPA: Database operations
-Hibernate: ORM framework
-MySQL: Relational database
-Lombok: Reduce boilerplate code
-Bean Validation: Input validation
+## 🚀 **Features**
 
-📁 Project Structure
+### 📘 Book Management
+
+* Full CRUD operations
+* Search by title/author
+* ISBN lookup
+* Availability tracking
+
+### 👤 Member Management
+
+* Member registration & profile management
+* Membership types
+* Search members
+
+### 🔄 Transaction Management
+
+* Issue & return books
+* Automatic fine calculation
+* Overdue tracking
+
+### ⚙️ Additional Features
+
+* Input validation (Bean Validation)
+* Global exception handling
+* JPA/Hibernate ORM
+* Pagination support
+* Clean layered architecture
+
+---
+
+## 📋 **Prerequisites**
+
+* **Java 17+**
+* **Maven 3.6+**
+* **MySQL 8.0+**
+* **Postman** (optional for testing)
+
+---
+
+## 🛠️ **Technologies Used**
+
+| Technology      | Purpose            |
+| --------------- | ------------------ |
+| Spring Boot 3.2 | Core framework     |
+| Spring Data JPA | DB operations      |
+| Hibernate       | ORM                |
+| MySQL           | Database           |
+| Lombok          | Reduce boilerplate |
+| Bean Validation | Input validation   |
+
+---
+
+## 📁 **Project Structure**
+
+```
 library-management-api/
 ├── src/
 │   ├── main/
@@ -58,37 +95,117 @@ library-management-api/
 │   │   │       └── ErrorResponse.java
 │   │   └── resources/
 │   │       └── application.properties
-│   └── test/
 └── pom.xml
-⚙️ Setup Instructions
-1. Clone the Repository
-bashgit clone https://github.com/yourusername/library-management-api.git
+```
+
+---
+
+## ⚙️ **Setup Instructions**
+
+### **1. Clone the Repository**
+
+```bash
+git clone https://github.com/yourusername/library-management-api.git
 cd library-management-api
-2. Configure MySQL Database
-Create a MySQL database:
-sqlCREATE DATABASE library_db;
-Update application.properties:
-propertiesspring.datasource.url=jdbc:mysql://localhost:3306/library_db?createDatabaseIfNotExist=true
+```
+
+---
+
+### **2. Create MySQL Database**
+
+```sql
+CREATE DATABASE library_db;
+```
+
+Update `application.properties`:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/library_db?createDatabaseIfNotExist=true
 spring.datasource.username=your_username
 spring.datasource.password=your_password
-3. Build the Project
-bashmvn clean install
-4. Run the Application
-bashmvn spring-boot:run
-The API will be available at: http://localhost:8080
-📚 API Endpoints
-Book Management (9 endpoints)
-MethodEndpointDescriptionPOST/api/booksCreate a new bookGET/api/booksGet all booksGET/api/books/paginatedGet books with paginationGET/api/books/{id}Get book by IDGET/api/books/isbn/{isbn}Get book by ISBNPUT/api/books/{id}Update bookDELETE/api/books/{id}Delete bookGET/api/books/search?title=&author=Search booksGET/api/books/availableGet available books
-Member Management (7 endpoints)
-MethodEndpointDescriptionPOST/api/membersRegister new memberGET/api/membersGet all membersGET/api/members/{id}Get member by IDGET/api/members/email/{email}Get member by emailPUT/api/members/{id}Update memberDELETE/api/members/{id}Delete memberGET/api/members/search?name=Search members by name
-Transaction Management (9 endpoints)
-MethodEndpointDescriptionPOST/api/transactions/issueIssue book to memberPUT/api/transactions/{id}/returnReturn bookGET/api/transactionsGet all transactionsGET/api/transactions/{id}Get transaction by IDGET/api/transactions/member/{memberId}Get member's transactionsGET/api/transactions/book/{bookId}Get book's transactionsGET/api/transactions/overdueGet overdue transactionsGET/api/transactions/member/{memberId}/activeGet active transactionsGET/api/transactions/status/{status}Get transactions by status
-Total: 25+ Endpoints
-🧪 Sample API Requests
-Create Book
-bashPOST http://localhost:8080/api/books
-Content-Type: application/json
 
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
+
+---
+
+### **3. Build the Project**
+
+```bash
+mvn clean install
+```
+
+### **4. Run the Application**
+
+```bash
+mvn spring-boot:run
+```
+
+Base URL:
+
+```
+http://localhost:8080
+```
+
+---
+
+# 📚 **API Endpoints (25+ Total)**
+
+---
+
+## **📘 Book Management**
+
+| Method | Endpoint                         | Description      |
+| ------ | -------------------------------- | ---------------- |
+| POST   | /api/books                       | Create new book  |
+| GET    | /api/books                       | Get all books    |
+| GET    | /api/books/paginated             | Paginated books  |
+| GET    | /api/books/{id}                  | Get book by ID   |
+| GET    | /api/books/isbn/{isbn}           | Get book by ISBN |
+| PUT    | /api/books/{id}                  | Update book      |
+| DELETE | /api/books/{id}                  | Delete book      |
+| GET    | /api/books/search?title=&author= | Search           |
+| GET    | /api/books/available             | Available books  |
+
+---
+
+## **👤 Member Management**
+
+| Method | Endpoint                   | Description     |
+| ------ | -------------------------- | --------------- |
+| POST   | /api/members               | Register member |
+| GET    | /api/members               | Get all members |
+| GET    | /api/members/{id}          | Member by ID    |
+| GET    | /api/members/email/{email} | Member by email |
+| PUT    | /api/members/{id}          | Update          |
+| DELETE | /api/members/{id}          | Delete          |
+| GET    | /api/members/search?name=  | Search by name  |
+
+---
+
+## **🔄 Transaction Management**
+
+| Method | Endpoint                                   | Description           |
+| ------ | ------------------------------------------ | --------------------- |
+| POST   | /api/transactions/issue                    | Issue book            |
+| PUT    | /api/transactions/{id}/return              | Return book           |
+| GET    | /api/transactions                          | All transactions      |
+| GET    | /api/transactions/{id}                     | Transaction by ID     |
+| GET    | /api/transactions/member/{memberId}        | Member’s transactions |
+| GET    | /api/transactions/book/{bookId}            | Book’s transactions   |
+| GET    | /api/transactions/overdue                  | Overdue               |
+| GET    | /api/transactions/member/{memberId}/active | Active                |
+| GET    | /api/transactions/status/{status}          | By status             |
+
+---
+
+## 🧪 **Sample API Requests**
+
+### **Create Book**
+
+```json
+POST /api/books
 {
   "title": "Clean Code",
   "author": "Robert C. Martin",
@@ -99,10 +216,12 @@ Content-Type: application/json
   "availableCopies": 5,
   "category": "Programming"
 }
-Create Member
-bashPOST http://localhost:8080/api/members
-Content-Type: application/json
+```
 
+### **Create Member**
+
+```json
+POST /api/members
 {
   "name": "John Doe",
   "email": "john.doe@example.com",
@@ -110,75 +229,79 @@ Content-Type: application/json
   "membershipDate": "2024-01-15",
   "membershipType": "PREMIUM"
 }
-Issue Book
-bashPOST http://localhost:8080/api/transactions/issue?bookId=1&memberId=1
-Return Book
-bashPUT http://localhost:8080/api/transactions/1/return
-📊 Database Schema
-Books Table
+```
 
-id (PK)
-title
-author
-isbn (unique)
-publisher
-published_year
-total_copies
-available_copies
-category
+### **Issue Book**
 
-Members Table
+```
+POST /api/transactions/issue?bookId=1&memberId=1
+```
 
-id (PK)
-name
-email (unique)
-phone (unique)
-membership_date
-membership_type
+### **Return Book**
 
-Transactions Table
+```
+PUT /api/transactions/1/return
+```
 
-id (PK)
-book_id (FK)
-member_id (FK)
-issue_date
-due_date
-return_date
-status
-fine
+---
 
-✅ Features Implemented
+## 📊 **Database Schema**
 
- RESTful API with 25+ endpoints
- JPA/Hibernate for database operations
- Optimized entity relationships (One-to-Many)
- Input validation with Bean Validation
- Global exception handling
- Proper HTTP status codes (200, 201, 400, 404, 500)
- Custom exceptions
- Pagination support
- Search functionality
- Automatic fine calculation for overdue books
- Transaction management
+### **Books**
 
-🔍 Testing
-Use Postman or cURL to test the endpoints. Import the provided Postman collection for easy testing.
-📝 Notes
+* id (PK)
+* title
+* author
+* isbn (unique)
+* publisher
+* published_year
+* total_copies
+* available_copies
+* category
 
-Default borrowing period: 14 days
-Fine per day for overdue books: ₹5.00
-Membership types: STANDARD, PREMIUM, STUDENT
-Transaction status: ISSUED, RETURNED, OVERDUE
+### **Members**
 
-🤝 Contributing
+* id (PK)
+* name
+* email (unique)
+* phone (unique)
+* membership_date
+* membership_type
 
-Fork the repository
-Create your feature branch
-Commit your changes
-Push to the branch
-Create a Pull Request
+### **Transactions**
+
+* id (PK)
+* book_id (FK)
+* member_id (FK)
+* issue_date
+* due_date
+* return_date
+* status
+* fine
+
+---
+
+## ✅ **Features Implemented**
+
+* 25+ REST API endpoints
+* JPA/Hibernate CRUD operations
+* Clean layered architecture
+* Global exception handling
+* Input validation
+* Pagination & search
+* Automatic fine calculation
+* Overdue tracking
+
+---
+
+## 🤝 **Contributing**
+
+1. Fork the repo
+2. Create feature branch
+3. Commit changes
+4. Push
+5. Open a Pull Request
+
+---
 
 
-Spring Boot Documentation
-Hibernate Documentation
-MySQL Documentation
